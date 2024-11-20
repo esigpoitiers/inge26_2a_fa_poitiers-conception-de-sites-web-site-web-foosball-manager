@@ -4,6 +4,8 @@ from flask import Flask, render_template, redirect, url_for, flash
 from flask_session import Session
 from cs50 import SQL
 
+from controllers.user_controller import UserController
+
 app = Flask(__name__)
 app.secret_key = "your-secret-key-here"
 
@@ -23,6 +25,7 @@ if not os.path.exists("database.db"):
 else:
     db = SQL("sqlite:///database.db")
 
+user_controller = UserController(db)
 
 def login_required(f):
     """
@@ -49,6 +52,7 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    # Hint: use the user_controller to check if the user exists
     return render_template("not_implemented.html")
 
 
