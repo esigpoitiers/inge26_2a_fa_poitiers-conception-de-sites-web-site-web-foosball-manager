@@ -19,7 +19,7 @@ if not os.path.exists("database.db"):
     # create the tables
     db = SQL("sqlite:///database.db")
     with open("database.sql", "r") as sql_file:
-        db.execute(sql_file.read())
+        [db.execute(sql) for sql in sql_file.read().split(";") if sql.strip()]
 else:
     db = SQL("sqlite:///database.db")
 
